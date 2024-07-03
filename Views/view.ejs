@@ -1,0 +1,36 @@
+<%- include('partials/header.ejs') %>
+
+
+    <main class="container">
+        <article class="blog-post">
+            <h2 class="display-5 link-body-emphasis mb-1">
+                <%= post.title %>
+            </h2>
+            <p class="blog-post-meta">
+                <%= post.date %>
+            </p>
+
+            <p>
+                <%= post.content %>
+            </p>
+            <hr>
+        </article>
+        <div class="row">
+            <div class="col-3 ">
+                <form action="/delete/<%= index %>?_method=DELETE" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-outline-primary rounded-pill text-wrap">Delete</button>
+                </form>
+            </div>
+            <div class="col-3  ">
+                <form action="/edit/<%= index %>" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-outline-primary rounded-pill text-wrap">Edit</button>
+                </form>
+            </div>
+            <div class="col-6 d-flex justify-content-end">
+                <a href="/" class="btn btn-outline-primary rounded-pill text-wrap">Back to Home</a>
+            </div>
+        </div>
+
+    </main>
+
+    <%- include('partials/footer.ejs') %>
