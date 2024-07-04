@@ -4,11 +4,15 @@ import methodOverride from "method-override";
 
 const app = express();
 const port = 3000;
+// const path = require('path');
 
+// app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
 
 app.use(express.static("Public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+
 
 let posts = [];
 
@@ -35,7 +39,7 @@ app.get("/view/:id", (req, res) => {
     const postID = req.params.id;
     const post = posts[postID];
     if (post) {
-        res.render("view.ejs", {
+        res.render("partials/view.ejs", {
             post: post,
             index: postID
         });
@@ -58,7 +62,7 @@ app.delete("/delete/:id", (req, res) => {
 app.post("/edit/:id", (req, res) => {
     const postID = parseInt(req.params.id, 10);
     const post = posts[postID];
-    res.render("create.ejs", {
+    res.render("partials/create.ejs", {
         postID: postID,
         blogTitle: post.title,
         blogContent: post.content
@@ -79,7 +83,7 @@ app.post("/update/:id", (req, res) => {
 });
 
 app.get("/create", (req, res) => {
-    res.render("create.ejs");
+    res.render("partials/create.ejs");
 });
 
 app.post("/post", (req, res) => {
@@ -96,7 +100,7 @@ app.post("/post", (req, res) => {
 
 
 app.get("/blogs", (req, res) => {
-    res.render("blog.ejs", {
+    res.render("partials/blog.ejs", {
         posts: posts
     });
 });
